@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #0f172a; 
+      color: #e5e7eb;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    h1, h2, h3 {
+      font-weight: 600;
+      color: #f9fafb;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 100px 16px 60px;
+    }
+
+    section {
+      padding: 60px 0;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.35);
+    }
+
+    section:last-of-type {
+      border-bottom: none;
+    }
+
+    .section-heading {
+      font-size: 1.8rem;
+      margin-bottom: 24px;
+      letter-spacing: 0.03em;
+    }
+
+    .muted {
+      color: #9ca3af;
+      font-size: 0.98rem;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+      background: rgba(15, 23, 42, 0.92);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.4);
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #e5e7eb;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand span {
+      padding: 2px 6px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #22c55e, #0ea5e9);
+      color: #020617;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      font-size: 0.98rem;
+    }
+
+    nav li {
+      position: relative;
+    }
+
+    nav a {
+      padding: 6px 10px;
+      border-radius: 999px;
+      transition: all 0.2s ease;
+      color: #cbd5f5;
+    }
+
+    nav a:hover {
+      background: rgba(148, 163, 184, 0.15);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      transform: translateY(-1px);
+      color: #f9fafb;
+      font-weight: 600;
+    }
+
+    .about-wrapper {
+      display: grid;
+      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.1fr);
+      gap: 40px;
+      align-items: center;
+    }
+
+    .about-text h1 {
+      font-size: 2.2rem;
+      margin-bottom: 8px;
+    }
+
+    .about-text h1 span {
+      color: #22c55e;
+    }
+
+    .about-text p {
+      margin-top: 10px;
+      font-size: 1rem;
+      color: #d1d5db;
+    }
+
+    .about-highlights {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .pill {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: #9ca3af;
+    }
+
+    .about-card {
+      background: radial-gradient(circle at top left, rgba(34, 197, 94, 0.24), transparent 55%),
+                  radial-gradient(circle at bottom right, rgba(56, 189, 248, 0.18), transparent 55%),
+                  #020617;
+      border-radius: 22px;
+      padding: 24px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.8);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .avatar-wrap {
+      width: 140px;
+      height: 140px;
+      border-radius: 999px;
+      overflow: hidden;
+      border: 3px solid rgba(34, 197, 94, 0.8);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.55);
+    }
+
+    .avatar-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .about-card h3 {
+      font-size: 1.2rem;
+    }
+
+    .about-card small {
+      color: #a5b4fc;
+      font-size: 0.85rem;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .about-card p {
+      text-align: center;
+      font-size: 0.95rem;
+      color: #e5e7eb;
+    }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+      margin-top: 8px;
+    }
+
+    .skill-card {
+      background: rgba(15, 23, 42, 0.95);
+      border-radius: 18px;
+      padding: 14px 16px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .skill-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      background: radial-gradient(circle at 30% 20%, #22c55e, #0ea5e9);
+      color: #020617;
+      flex-shrink: 0;
+      font-weight: 700;
+    }
+
+    .skill-info h3 {
+      font-size: 1.02rem;
+      margin-bottom: 4px;
+    }
+
+    .skill-info p {
+      font-size: 0.9rem;
+      color: #9ca3af;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+      margin-top: 8px;
+    }
+
+    .project-card {
+      background: rgba(15, 23, 42, 0.95);
+      border-radius: 18px;
+      padding: 16px 18px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .project-tag {
+      font-size: 0.75rem;
+      padding: 4px 7px;
+      border-radius: 999px;
+      border: 1px solid rgba(96, 165, 250, 0.8);
+      color: #bfdbfe;
+      width: fit-content;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .project-card h3 {
+      font-size: 1.05rem;
+    }
+
+    .project-card p {
+      font-size: 0.92rem;
+      color: #d1d5db;
+    }
+
+    .project-meta {
+      font-size: 0.83rem;
+      color: #9ca3af;
+      margin-top: 4px;
+    }
+
+    .recommendations-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+      margin-bottom: 26px;
+    }
+
+    .recommendation-card {
+      background: rgba(15, 23, 42, 0.96);
+      border-radius: 18px;
+      padding: 16px 18px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      font-size: 0.96rem;
+      color: #e5e7eb;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .recommendation-card::before {
+      content: "“";
+      position: absolute;
+      font-size: 4rem;
+      line-height: 1;
+      top: -14px;
+      left: 10px;
+      color: rgba(51, 65, 85, 0.9);
+    }
+
+    .recommendation-card p {
+      margin-left: 18px;
+    }
+
+    .recommendation-card .from {
+      display: block;
+      margin-top: 10px;
+      font-size: 0.8rem;
+      color: #9ca3af;
+      margin-left: 18px;
+    }
+
+    .recommendation-form {
+      background: rgba(15, 23, 42, 0.96);
+      border-radius: 20px;
+      padding: 18px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+    }
+
+    .recommendation-form h3 {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+    }
+
+    .recommendation-form label {
+      font-size: 0.9rem;
+      color: #cbd5f5;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .recommendation-form textarea {
+      width: 100%;
+      min-height: 90px;
+      resize: vertical;
+      border-radius: 12px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      padding: 8px 10px;
+      background: #020617;
+      color: #e5e7eb;
+      font-family: inherit;
+      font-size: 0.96rem;
+      outline: none;
+    }
+
+    .recommendation-form textarea:focus {
+      border-color: #22c55e;
+      box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.6);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 10px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: none;
+      font-size: 0.92rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      cursor: pointer;
+      background: linear-gradient(135deg, #22c55e, #0ea5e9);
+      color: #020617;
+      box-shadow: 0 10px 18px rgba(34, 197, 94, 0.4);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+    }
+
+    .btn span {
+      font-size: 1.1rem;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.05);
+      box-shadow: 0 12px 26px rgba(34, 197, 94, 0.45);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+      box-shadow: 0 6px 12px rgba(34, 197, 94, 0.3);
+    }
+
+    .home-icon {
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      width: 46px;
+      height: 46px;
+      border-radius: 999px;
+      background: radial-gradient(circle at top left, #22c55e, #0ea5e9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.9);
+      cursor: pointer;
+      z-index: 30;
+      border: 2px solid #020617;
+    }
+
+    .home-icon span {
+      font-size: 1.4rem;
+      color: #020617;
+    }
+
+    .home-icon:hover {
+      transform: translateY(-1px);
+    }
+
+    .popup {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 40;
+    }
+
+    .popup.hidden {
+      display: none;
+    }
+
+    .popup-content {
+      background: #020617;
+      padding: 24px 22px 18px;
+      border-radius: 20px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      max-width: 320px;
+      text-align: center;
+    }
+
+    .popup-content h3 {
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+    }
+
+    .popup-content p {
+      font-size: 0.95rem;
+      color: #e5e7eb;
+      margin-bottom: 14px;
+    }
+
+    .popup-content button {
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 500;
+      background: #e5e7eb;
+      color: #020617;
+    }
+
+    .popup-content button:hover {
+      filter: brightness(0.96);
+    }
+
+    @media (max-width: 768px) {
+      .about-wrapper {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav ul {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+      }
+
+      main {
+        padding-top: 120px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="#home" class="home-icon" title="Back to top">
+    <span>⌂</span>
+  </a>
+
+  <div id="popup" class="popup hidden">
+    <div class="popup-content">
+      <h3>Thank you! 🎉</h3>
+      <p>Your recommendation has been added to the list.</p>
+      <button id="close-popup">Close</button>
+    </div>
+  </div>
+
+  <header id="home">
+    <div class="nav-inner">
+    
+      <div class="brand">
+        Jaya
+        <span>PORTFOLIO</span>
+      </div>
+
+      <nav>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Project details</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#recommendations">Recommendations</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    
+    <section id="about">
+      <div class="about-wrapper">
+        <div class="about-text">
+          <h1>Hi, I'm <span>G TANISHA</span> 👋</h1>
+          <p>
+            I am an aspiring web developer who loves building clean, responsive
+            and user-friendly interfaces. I’m currently focused on mastering
+            HTML, CSS and JavaScript while exploring modern tools and APIs.
+          </p>
+          <p class="muted">
+            I enjoy solving real-world problems, learning new technologies, and
+            improving my problem-solving and communication skills every day.
+          </p>
+          <div class="about-highlights">
+            <span class="pill">Front-end Enthusiast</span>
+            <span class="pill">JavaScript Learner</span>
+            <span class="pill">Problem Solver</span>
+          </div>
+        </div>
+
+        <article class="about-card">
+          <div class="avatar-wrap">
+          
+            <img
+              src="IMG-20250311-WA0001.jpg"
+              alt="Profile of Tanisha"
+            />
+          </div>
+          <h3>TANISHA</h3>
+          <small>Web Developer In Progress</small>
+          <p>
+            “I’m building my foundation in web development by
+            practicing hands-on projects, reading documentation, and
+            experimenting with new ideas. My goal is to create helpful digital experiences.”
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="skills">
+      <h2 class="section-heading">Skills</h2>
+      <p class="muted">
+        A snapshot of the technologies and tools I’ve been working with recently.
+      </p>
+
+      <div class="skills-grid">
+        <div class="skill-card">
+          <div class="skill-logo">JS</div>
+          <div class="skill-info">
+            <h3>JavaScript</h3>
+            <p>
+              Building dynamic, interactive web pages and connecting to APIs.
+            </p>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-logo">HT</div>
+          <div class="skill-info">
+            <h3>HTML5</h3>
+            <p>
+              Writing clean, semantic markup for accessibility and structure.
+            </p>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-logo">CS</div>
+          <div class="skill-info">
+            <h3>CSS3</h3>
+            <p>
+              Styling responsive layouts with Flexbox, Grid, and animations.
+            </p>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-logo">GH</div>
+          <div class="skill-info">
+            <h3>Git &amp; GitHub</h3>
+            <p>
+              Version control and project collaboration using branches and PRs.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <h2 class="section-heading">Skills</h2>
+      <p class="muted">
+        A snapshot of the technologies and tools I’ve been working with recently.
+      </p>
+
+      <div class="skills-grid">
+        
+        <div class="skill-card">
+          <div class="skill-logo">HT</div>
+          <div class="skill-info">
+            <h3>HTML5</h3>
+            <p>
+              Writing clean, semantic markup to structure web pages effectively.
+            </p>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-logo">CS</div>
+          <div class="skill-info">
+            <h3>CSS3</h3>
+            <p>
+              Creating responsive layouts with Flexbox, Grid and modern styling.
+            </p>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-logo">JS</div>
+          <div class="skill-info">
+            <h3>JavaScript</h3>
+            <p>
+              Adding interactivity, handling events and working with APIs in the browser.
+            </p>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-logo">GH</div>
+          <div class="skill-info">
+            <h3>Git &amp; GitHub</h3>
+            <p>
+              Managing source code, tracking changes and collaborating on projects.
+            </p>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-logo">RE</div>
+          <div class="skill-info">
+            <h3>React (Basics)</h3>
+            <p>
+              Building component-based user interfaces and understanding state & props.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="projects">
+      <h2 class="section-heading">Project details</h2>
+      <p class="muted">
+        A few of the projects I’ve worked on to practice and demonstrate my skills.
+      </p>
+
+      <div class="projects-grid">
+        <article class="project-card">
+          <span class="project-tag">Web App</span>
+          <h3>Daily Habit Tracker</h3>
+          <p>
+            A responsive web app that allows users to add, toggle, and track
+            daily habits, visualising progress over the week using simple charts.
+          </p>
+          <p class="project-meta">
+            Built with HTML, CSS and vanilla JavaScript.
+          </p>
+        </article>
+
+        <article class="project-card">
+          <span class="project-tag">API Project</span>
+          <h3>Weather Lookup Tool</h3>
+          <p>
+            A small application that fetches current weather data for any city
+            using a public API and displays it with clear icons and temperature
+            details.
+          </p>
+          <p class="project-meta">
+            Focused on API calls, JSON handling and error states.
+          </p>
+        </article>
+
+        <article class="project-card">
+          <span class="project-tag">UI Project</span>
+          <h3>Responsive Portfolio Layout</h3>
+          <p>
+            A mobile-first portfolio template with a sticky navigation bar,
+            smooth scrolling, and modern card-based sections for content.
+          </p>
+          <p class="project-meta">
+            Practiced layout techniques using Flexbox and Grid.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="recommendations">
+      <h2 class="section-heading">Recommendations</h2>
+      <p class="muted">
+        Feedback and kind words from people I’ve learned and worked with.
+      </p>
+
+      <div class="recommendations-grid recommendations-list">
+        <article class="recommendation-card">
+          <p>
+            Tanisha quickly understands new concepts and is always willing to
+            ask thoughtful questions. Her curiosity about JavaScript really
+            stands out.
+          </p>
+          <span class="from">– Mentor, Web Development Bootcamp</span>
+        </article>
+
+        <article class="recommendation-card">
+          <p>
+            I’m impressed with the way Tanisha breaks down complex problems
+            into smaller steps. She is reliable and consistently meets deadlines.
+          </p>
+          <span class="from">– Project Partner, Study Group</span>
+        </article>
+
+        <article class="recommendation-card">
+          <p>
+            Tanisha is always experimenting with new ideas and tools.
+            Her enthusiasm for continuous learning inspires others around her.
+          </p>
+          <span class="from">– Friend &amp; Peer Learner</span>
+        </article>
+      </div>
+
+      <div class="recommendation-form">
+        <h3>Leave a Recommendation</h3>
+        <form id="recommendation-form">
+          <label for="recommendation-text">
+            Share your feedback or experience working with me:
+          </label>
+          <textarea
+            id="recommendation-text"
+            placeholder="Write your recommendation here..."
+            required
+          ></textarea>
+
+          <button type="submit" class="btn">
+            <span>➤</span> Submit Recommendation
+          </button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const form = document.getElementById("recommendation-form");
+      const textarea = document.getElementById("recommendation-text");
+      const recommendationsList = document.querySelector(".recommendations-list");
+      const popup = document.getElementById("popup");
+      const closePopupBtn = document.getElementById("close-popup");
+
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const text = textarea.value.trim();
+        if (!text) return;
+
+        const card = document.createElement("article");
+        card.className = "recommendation-card";
+        card.innerHTML = `
+          <p>${text}</p>
+          <span class="from">– New recommendation</span>
+        `;
+
+        recommendationsList.appendChild(card);
+
+        textarea.value = "";
+
+        popup.classList.remove("hidden");
+      });
+
+      closePopupBtn.addEventListener("click", function () {
+        popup.classList.add("hidden");
+      });
+
+      popup.addEventListener("click", function (event) {
+        if (event.target === popup) {
+          popup.classList.add("hidden");
+        }
+      });
+    });
+  </script>
+</body>
+</html>
